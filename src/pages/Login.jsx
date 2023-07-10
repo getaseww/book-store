@@ -4,6 +4,7 @@ import Input from '../components/Input'
 import Button from '../components/Button'
 import SubTitle from '../components/SubTitle'
 import SizedBox from '../components/SizedBox'
+import { Link, useLocation } from 'react-router-dom'
 
 export default function Login() {
 
@@ -11,6 +12,10 @@ export default function Login() {
     const [password,setPassword]=useState()
 
     const [query,setQuery]=useState()
+
+    let location=useLocation();
+
+    console.log("location",location);
 
     
    const handleLogin=()=>{
@@ -39,6 +44,10 @@ export default function Login() {
                         <SizedBox type="v-10" />
                         <Input type="password" placeholder="Password" handleChange={setPassword}/>
                         <SizedBox type="v-10" />
+                        <div className='justify-start'>
+
+                        <SubTitle>Don't have an account <Link to="/register" state={{name:"test"}}   >Register</Link> </SubTitle>
+                        </div>
                         <Button handleClick={handleLogin}>Login</Button>
                     </div>
                 </div>
