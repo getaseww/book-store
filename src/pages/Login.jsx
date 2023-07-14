@@ -8,7 +8,7 @@ import { Link, useLocation } from 'react-router-dom'
 
 export default function Login() {
 
-    const [email,setEmail]=useState()
+    const [email,setEmail]=useState("name")
     const [password,setPassword]=useState()
 
     const [query,setQuery]=useState()
@@ -23,9 +23,8 @@ export default function Login() {
 
 
    useEffect(()=>{
-
-    console.log("email changed")
-   },[query,email,password])
+    setEmail((email)=>email+" "+email)
+   },[email])
 
     return (
         <div className='wrapper w-full h-full'>
@@ -40,7 +39,7 @@ export default function Login() {
                             <Title>Welcome to Materialize! 👋🏻</Title>
                             <SubTitle>Please sign-in to your account and start the adventure</SubTitle>
                         </div>
-                        <Input type="text" placeholder="Email" handleChange={setEmail}/>
+                        <Input type="text" placeholder="Email"  handleChange={setEmail}/>
                         <SizedBox type="v-10" />
                         <Input type="password" placeholder="Password" handleChange={setPassword}/>
                         <SizedBox type="v-10" />
