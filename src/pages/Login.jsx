@@ -5,6 +5,7 @@ import Button from '../components/Button'
 import SubTitle from '../components/SubTitle'
 import SizedBox from '../components/SizedBox'
 import { Link, useLocation } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 export default function Login() {
 
@@ -22,17 +23,20 @@ export default function Login() {
    }
 
 
-   useEffect(()=>{
-    setEmail((email)=>email+" "+email)
-   },[email])
+//    useEffect(()=>{
+//     setEmail((email)=>email+" "+email)
+//    },[email])
 
+   const {count}=useSelector((state)=>state.counter)
+
+   
     return (
         <div className='wrapper w-full h-full'>
             <div></div>
             <div className='minWrapper'>
                 <div className='card col'>
                     <div className='padding-20'>
-                        <Title>Materio</Title>
+                        <Title>Materio {count}</Title>
                         <div className='w-100 justify-start'>
                             <SizedBox type="v-10" />
                             <SizedBox type="v-10" />
