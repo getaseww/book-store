@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Title from '../components/Title';
 import SizedBox from '../components/SizedBox';
 import { decrement, increment } from '../store/actions/counterActions';
+import { fetchProducts } from '../store/actions/productActions';
 
 export default function Home() {
   const [query, setQuery] = useState();
@@ -53,22 +54,23 @@ export default function Home() {
     console.log("form data", data);
   };
 
-  const counter=useSelector((state)=>state.counter)
-  const dispatch=useDispatch();
+  const { count } = useSelector((state) => state.counter)
+  const { products, success, message, pending } = useSelector((state) => state.product)
+  const dispatch = useDispatch();
 
-  const handleIncrement=()=>{
+  const handleIncrement = () => {
     dispatch(increment());
   }
 
-  const handleDecrement=()=>{
+  const handleDecrement = () => {
     dispatch(decrement())
   }
-  
 
+  useEffect(() => {
+    dispatch(fetchProducts())
+  }, [])
 
-
-  
-
+  console.log("products from store", products)
   return (
     <div className='wrapper'>
 
@@ -102,10 +104,17 @@ export default function Home() {
 
       </div>
       <div>
-        <button onClick={()=>handleIncrement()}  className='button'>+</button>
+        <button onClick={() => handleIncrement()} className='button'>+</button>
         <SizedBox type="v-10" />
-        <button onClick={()=>handleDecrement()} className='button'>-</button>
-        <Title>{counter.count}</Title>
+        <button onClick={() => handleDecrement()} className='button'>-</button>
+        <Title>{count}</Title>
+        {
+          success && products && products.map((product) => {
+            <Title>{product.title}</Title>
+
+            // <p className='title'>{product.title}</p>
+          })
+        }
       </div>
     </div>
   )

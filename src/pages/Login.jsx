@@ -28,15 +28,15 @@ export default function Login() {
 //    },[email])
 
    const {count}=useSelector((state)=>state.counter)
+   const {products,pending}=useSelector((state)=>state.product)
 
-   
     return (
         <div className='wrapper w-full h-full'>
             <div></div>
             <div className='minWrapper'>
                 <div className='card col'>
                     <div className='padding-20'>
-                        <Title>Materio {count}</Title>
+                        <Title>Materio </Title>
                         <div className='w-100 justify-start'>
                             <SizedBox type="v-10" />
                             <SizedBox type="v-10" />
