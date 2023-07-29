@@ -55,7 +55,7 @@ export default function Home() {
   };
 
   const { count } = useSelector((state) => state.counter)
-  const { products, success, message, pending } = useSelector((state) => state.product)
+  const { posts, message, pending } = useSelector((state) => state.product)
   const dispatch = useDispatch();
 
   const handleIncrement = () => {
@@ -70,7 +70,6 @@ export default function Home() {
     dispatch(fetchProducts())
   }, [])
 
-  console.log("products from store", products)
   return (
     <div className='wrapper'>
 
@@ -104,16 +103,15 @@ export default function Home() {
 
       </div>
       <div>
-        <button onClick={() => handleIncrement()} className='button'>+</button>
+        {/* <button onClick={() => handleIncrement()} className='button'>+</button> */}
         <SizedBox type="v-10" />
-        <button onClick={() => handleDecrement()} className='button'>-</button>
+        {/* <button onClick={() => handleDecrement()} className='button'>-</button> */}
         <Title>{count}</Title>
         {
-          success && products && products.map((product) => {
+          !pending && posts && posts.map((product) => (
             <Title>{product.title}</Title>
-
             // <p className='title'>{product.title}</p>
-          })
+          ))
         }
       </div>
     </div>

@@ -30,7 +30,6 @@ export const fetchProductFailure=(error)=>{
 export const fetchProducts=()=>{
     return (dispatch)=>{
         dispatch(fetchProductRequest);
-
         axios.get('https://dummyjson.com/products/')
         .then((res)=>{
             const products=res.data.products;

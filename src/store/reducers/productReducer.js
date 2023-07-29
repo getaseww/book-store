@@ -1,7 +1,7 @@
 import { FETCHPRODUCTFAILURE,FETCHPRODUCTSUCCESS,FETCHPRODUCTREQUEST } from "../actions/productActions";
 
 const initialState={
-    products:[],
+    posts:[],
     pending:false,
     message:null,
 }
@@ -17,7 +17,7 @@ const productReducer=(state=initialState,action)=>{
         case FETCHPRODUCTSUCCESS:
             return {
                 ...state,
-                products:action.payload,
+                posts:action.payload,
             }
         case FETCHPRODUCTFAILURE:
             return {
