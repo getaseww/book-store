@@ -1,12 +1,17 @@
-import React, { useEffect, useState } from 'react'
-import Input from '../components/Input';
+import React, { useEffect, useState, lazy, Suspense } from 'react'
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import Title from '../components/Title';
+// import Title from '../components/Title';
 import SizedBox from '../components/SizedBox';
 import { decrement, increment } from '../store/actions/counterActions';
 import { fetchProducts } from '../store/actions/productActions';
+import useScrollPosition from '../customeHooks/useScrollPosition';
+import { Helmet } from 'react-helmet';
+
+const Title=React.lazy(()=>import("../components/Title"));
+
+const Input = React.lazy(() => import('../components/Input'));
 
 export default function Home() {
   const [query, setQuery] = useState();
@@ -34,14 +39,14 @@ export default function Home() {
       axios.put("https://dummyjson.com/products/1", data)
         .then(res => console.log(res))
         .catch(error => console.log(error))
-      // fetch("https://dummyjson.com/products/add",
-      //   {
-      //     method: "",
-      //     headers: { "content-type": "application/json" },
-      //     body: JSON.stringify(data)
-      //   })
-      //   .then(res => res.json())
-      //   .then(data => console.log("from post req", data))
+      fetch("https://dummyjson.com/products/add",
+        {
+          method: "",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify(data)
+        })
+        .then(res => res.json())
+        .then(data => console.log("from post req", data))
     }
     // fetchData()
     postData()
@@ -70,8 +75,20 @@ export default function Home() {
     dispatch(fetchProducts())
   }, [])
 
+  const pos = useScrollPosition(0.5);
+  console.log("pos", pos)
   return (
-    <div className='wrapper'>
+    <div className='wrapper' >
+
+      <Helmet>
+        <title>New Title</title>
+        <meta name="description" content="Helmet application" />
+      </Helmet>
+      
+{/* 
+      <Suspense fallback={<div>Loading...</div>} id={process.env.GA_KEY}>
+        <Input placeholder="query" type="text" handleChange={setQuery} />
+      </Suspense> */}
 
       {/* <Input /> */}
 
@@ -103,11 +120,16 @@ export default function Home() {
 
       </div>
       <div>
-        {/* <button onClick={() => handleIncrement()} className='button'>+</button> */}
+        <button onClick={() => handleIncrement()} className='button'>+</button>
         <SizedBox type="v-10" />
-        {/* <button onClick={() => handleDecrement()} className='button'>-</button> */}
+        <button onClick={() => handleDecrement()} className='button'>-</button>
         <Title>{count}</Title>
         {
+          !pending && posts && posts.map((product) => (
+            <Title>{product.title}</Title>
+            // <p className='title'>{product.title}</p>
+          ))
+        }{
           !pending && posts && posts.map((product) => (
             <Title>{product.title}</Title>
             // <p className='title'>{product.title}</p>

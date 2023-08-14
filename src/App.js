@@ -6,6 +6,9 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import Register from './pages/Register';
 import { useState } from 'react';
+import ScrollEffect from './pages/ScrollEffect';
+// import dotenv from 'dotenv';
+// dotenv.config();
 
 function App() {
 
