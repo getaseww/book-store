@@ -2,33 +2,26 @@ const mongoose = require('mongoose')
 const Role = require('./Role')
 var SchemaTypes = mongoose.Schema.Types
 
-const UserSchema = new mongoose.Schema({
-    roleId: {
-        type: String,
-        ref:Role,
-        required: true,
-    },
+const PaymentSchema = new mongoose.Schema({
     firstName: {
         type: String,
         required: true,
     },
     lastName: {
         type: String,
-        required: true,
     },
     email: {
         type: String,
-        required: true,
     },
-    userName: {
+    phoneNumber: {
         type: String,
-        required: true,
     },
-    password: {
-        type: String,
+    totalPrice: {
+        type: Number,
+        required:true,
     },
 }, {
     timestamps: true,
 })
 
-module.exports = mongoose.model('users', UserSchema)
+module.exports = mongoose.model('payment', PaymentSchema)
